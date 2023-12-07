@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Url Shorter</title>
+</head>
+<body>
+    <form style="margin: auto; background-color: azure; padding: 2rem 3rem;" >
+        <label style="margin: 0 20px;">Enter Url</label>
+        <input type="text" id="url" name="urlReq" placeholder="example: wwww.google.com">
+        <button type="button" onclick="postDate()">Post Url</button>
+    </form>
+
+    <script>
+  const postDate = () => {
+    let userInput = document.getElementById("url").value;
+
+    fetch("/api/shorturl", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url: userInput }), // Convert the body to JSON format
+    })
+        .then(res => res.json()) // Parse the response as JSON
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
+};
+
+    </script>
+</body>
+</html>
